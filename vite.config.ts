@@ -26,7 +26,7 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist"), // Ensure the output is in the 'dist' directory
-    emptyOutDir: true, // Empty the output directory before building
+    outDir: path.resolve(import.meta.dirname, "dist", "public"), // Explicitly set the output to 'dist/public'
+    emptyOutDir: true,
   },
 });
