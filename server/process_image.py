@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Loads from the .env file
+
+
 import sys
 import cv2
 import numpy as np
