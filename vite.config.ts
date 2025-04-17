@@ -9,7 +9,8 @@ export default defineConfig({
     react(),
     runtimeErrorOverlay(),
     themePlugin(),
-    ...(process.env.NODE_ENV !== "production" && process.env.REPL_ID !== undefined
+    ...(process.env.NODE_ENV !== "production" &&
+    process.env.REPL_ID !== undefined
       ? [
           await import("@replit/vite-plugin-cartographer").then((m) =>
             m.cartographer(),
@@ -26,7 +27,7 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist", "public"), // Explicitly set the output to 'dist/public'
+    outDir: path.resolve(import.meta.dirname, "client", "dist"), // Corrected output directory to 'client/dist'
     emptyOutDir: true,
   },
 });
