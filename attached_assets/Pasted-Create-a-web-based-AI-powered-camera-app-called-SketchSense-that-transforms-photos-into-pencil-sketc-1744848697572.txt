@@ -1,0 +1,325 @@
+Create a web-based AI-powered camera app called SketchSense that transforms photos into pencil sketches with two modes: Pure Pencil (clean, diagram-focused sketches for educational purposes like human systems or math graphs) and Artistic Pencil (beautiful, stylized pencil art). The app must be built with a modular, well-documented, and beginner-friendly codebase for a 19-year-old developer with Python experience, using JavaScript (JS/JSX) (no TypeScript) for the frontend and Express (Node.js) with Python for the backend. Use OpenCV for Pure Pencil processing and a Hugging Face placeholder for Artistic Pencil (explicitly avoid Open AI). The project must support: (1) hosting on Replit’s free tier, or (2) downloading as a ZIP for offline development in Visual Studio Code (VS Code). Include a feature for users to edit the sketch’s background color (options: Blue, White, Gold, Yellow, Gray; default: White/Gray gradient) and a PostgreSQL database to store user preferences (e.g., mode, subject, mood, background, line thickness), feedback, and sketch history for AI learning/adaptation. Implement a sci-fi/philosophical UI aesthetic (dark mode, neon accents, starry background, poetic animations) with a predefined color scheme. Integrate all customizations (annotations, SVG output, live preview, user profiles, Hugging Face integration) and add unique features (e.g., adaptive sketch styles, thematic overlays, collaborative sketching, social sharing) to make SketchSense innovative and distinctive. Ensure error-free operation with robust error handling, clear PostgreSQL setup, and fallback mechanisms (e.g., local JSON storage). The codebase must be clear, extensible, and reflect a vision of bridging human and technology through intuitive, educational, and creative design.
+App Features
+Image Input:
+Support image uploads (gallery) or real-time camera capture.
+
+Accept JPG, PNG (max 5MB for performance).
+
+Display preview in a neon-bordered frame with a subtle zoom hover effect.
+
+Error handling: Show “Invalid image format” alert for unsupported files.
+Mode Selection:
+Radio buttons for:
+Pure Pencil: Clean sketches for diagrams (e.g., biology, math).
+
+Artistic Pencil: Stylized art with shading (e.g., portraits).
+Default: Pure Pencil with tooltip: “Optimized for school diagrams.”
+
+Store selection in PostgreSQL.
+Subject & Context (Educational Focus):
+Dropdown: Biology, Physics, Chemistry, Math, Geography, Other.
+
+Text input for context (e.g., “human digestive system”).
+
+Store in PostgreSQL; log for future subject-specific processing (e.g., Biology: sharper outlines).
+
+Neon-blue styling with hover glow.
+Mood-Based Adjustments (Artistic Personalization):
+Button group: Excited, Curious, Stressed, Neutral, Frustrated.
+
+Placeholder: OpenCV tweaks (Excited: +10% brightness; Stressed: +15% contrast).
+
+Store in PostgreSQL for AI adaptation (e.g., trend toward brighter sketches).
+
+Emoji icons (e.g., ) with neon glow.
+Background Color Editing:
+Dropdown/swatches: Blue (#3B82F6), White (#FFFFFF), Gold (#F59E0B), Yellow (#FBBF24), Gray (#6B7280).
+
+Default: White/Gray gradient (linear-gradient(#FFFFFF, #D1D5DB)).
+
+Apply via Canvas API; store in PostgreSQL.
+
+Neon-styled selector with hover animation.
+Image Processing:
+Pure Pencil:
+OpenCV Canny: Grayscale, Gaussian blur (5x5), edges (thresholds: 50, 150), invert.
+
+Adjustable line thickness (default: medium) in PostgreSQL.
+Artistic Pencil:
+Placeholder: OpenCV soft filter (+10% contrast, slight blur).
+
+Comments for Hugging Face model (e.g., Stable Diffusion pencil-style).
+Express API: POST /process accepts { image: base64, mode, subject, mood, background, thickness }, returns { sketch: base64 }.
+
+Error handling: Fallback to default parameters if processing fails.
+
+Store parameters in PostgreSQL for AI learning.
+Output Display:
+Side-by-side original and sketch with selected background.
+
+Neon-blue pulsating spinner: “Weaving your vision...”
+
+Dark starry background, neon-bordered frames.
+Download Options:
+Buttons for PNG, JPG (1080p), SVG (for Pure Pencil).
+
+Include background color in exports.
+
+Neon-green buttons with 5% scale-up hover.
+Feedback Loop:
+Star rating (1–5 neon-yellow stars).
+
+Checkboxes: “Too many details,” “Not clear enough,” “Loved it,” “Try thicker lines.”
+
+Save to PostgreSQL (feedback table); fallback to feedback.json if database fails.
+
+AI adaptation: Adjust OpenCV (e.g., thicker lines for frequent requests).
+
+Tooltip: “Shape your sketch’s destiny!”
+Annotation Tool:
+Add text/shapes to sketches (e.g., label a heart diagram).
+
+Use Fabric.js with neon toolbar (text, lines, circles).
+
+Save in PostgreSQL (annotations table).
+Vector Output (SVG):
+SVG download for Pure Pencil using potrace.
+
+Neon-styled SVG button.
+Live Preview:
+Real-time sketch overlay in camera feed (Pure Pencil, low-res).
+
+Neon-blue “Live Sketch” toggle.
+User Profiles:
+Store sketch history, preferences in PostgreSQL (users, sketches tables).
+
+UI: View past sketches, favorite backgrounds.
+
+Neon-styled profile card.
+Unique Features:
+Adaptive Sketch Styles:
+AI analyzes PostgreSQL feedback/history to suggest styles (e.g., “Thicker lines for Biology?”).
+
+Neon-yellow “Optimize” button.
+Thematic Overlays:
+Sci-fi effects (e.g., holographic glow for Pure Pencil, starry shimmer for Artistic).
+
+Canvas API, toggleable in UI.
+Collaborative Sketching:
+Share sketch session link for real-time annotation (using WebSocket placeholder).
+
+Neon-green “Collaborate” button.
+Social Sharing:
+Share sketches on Twitter/X, Instagram with metadata (e.g., “SketchSense: Biology diagram”).
+
+Neon-green “Share” button.
+Educational Hints:
+Subject-specific tips (e.g., Biology: “Focus on organ outlines”).
+
+Neon-blue tooltip.
+Sketch Evolution Tracker:
+Visualize sketch improvements (e.g., “Line thickness +20% based on feedback”).
+
+Neon-styled progress bar.
+UI/UX:
+Sci-fi/philosophical aesthetic:
+Colors: Dark gray (#1F2937), neon blue (#60A5FA), neon green (#34D399), neon yellow (#FBBF24), light gray (#D1D5DB).
+
+Font: Google Fonts Inter.
+
+Animations: 0.3s fade-in, glow buttons, starry background particles.
+
+Text: Poetic (e.g., “Weaving your vision...”).
+Mobile/desktop card-based layout.
+Technical Requirements
+Frontend:
+Framework: React (Vite, JS/JSX).
+
+Libraries:
+react-webcam
+
+react-filepond
+
+axios
+
+tailwindcss
+
+react-icons
+
+html2canvas
+
+fabric
+Components:
+CameraCapture.js
+
+ImageUploader.js
+
+ImagePreview.js
+
+ModeSelector.js
+
+SubjectSelector.js
+
+MoodSelector.js
+
+BackgroundSelector.js
+
+FeedbackForm.js
+
+DownloadButtons.js
+
+AnnotationTool.js
+
+ProfileCard.js
+
+App.js
+src/constants.js:
+js
+export const MODES = { PENCIL: "pencil", ART: "art" };
+export const SUBJECTS = ["Biology", "Physics", "Chemistry", "Math", "Geography", "Other"];
+export const MOODS = ["Excited", "Curious", "Stressed", "Neutral", "Frustrated"];
+export const BACKGROUND_COLORS = [
+  { name: "Blue", value: "#3B82F6" },
+  { name: "White", value: "#FFFFFF" },
+  { name: "Gold", value: "#F59E0B" },
+  { name: "Yellow", value: "#FBBF24" },
+  { name: "Gray", value: "#6B7280" }
+];
+export const DEFAULT_BACKGROUND = "linear-gradient(#FFFFFF, #D1D5DB)";
+export const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+export const EDUCATIONAL_TIPS = {
+  Biology: "Focus on organ outlines for clarity.",
+  Math: "Emphasize axes and curves."
+};
+Backend:
+Framework: Express (Node.js) with Python.
+
+Libraries:
+Node: express, cors, body-parser, pg, child_process.
+
+Python: opencv-python, Pillow, potrace.
+Endpoints (server/app.js):
+POST /process
+
+POST /feedback
+
+GET /preferences
+
+POST /preferences
+
+POST /annotations
+
+GET /profile
+Python (server/process_image.py):
+OpenCV, SVG, Hugging Face placeholder.
+PostgreSQL tables:
+users (id, preferences_json)
+
+feedback (id, user_id, rating, comments, timestamp)
+
+annotations (id, user_id, sketch_id, data)
+
+sketches (id, user_id, image_base64, timestamp)
+Folder/File Structure:
+SketchSense/
+├── client/                     # Frontend (React)
+│   ├── public/                 # Static assets
+│   ├── src/
+│   │   ├── assets/             # Images, icons
+│   │   ├── components/
+│   │   │   ├── CameraCapture.js
+│   │   │   ├── ImageUploader.js
+│   │   │   ├── ImagePreview.js
+│   │   │   ├── ModeSelector.js
+│   │   │   ├── SubjectSelector.js
+│   │   │   ├── MoodSelector.js
+│   │   │   ├── BackgroundSelector.js
+│   │   │   ├── FeedbackForm.js
+│   │   │   ├── DownloadButtons.js
+│   │   │   ├── AnnotationTool.js
+│   │   │   └── ProfileCard.js
+│   │   ├── pages/
+│   │   │   └── Home.js
+│   │   ├── App.js
+│   │   ├── main.js
+│   │   ├── index.css
+│   │   └── constants.js
+│   ├── package.json
+│   └── vite.config.js
+├── server/                     # Backend
+│   ├── app.js                  # Express API
+│   ├── process_image.py        # OpenCV, SVG
+│   ├── database.js             # PostgreSQL setup
+│   ├── feedback.json           # Fallback storage
+│   ├── package.json
+│   ├── requirements.txt
+│   └── .env
+├── README.md
+├── .gitignore
+└── .replit
+Deployment:
+Replit:
+Free tier with PostgreSQL (e.g., Neon.tech).
+
+.replit:
+run = "bash -c 'cd server && npm install && python process_image.py & node app.js & cd client && npm install && npm run dev'"
+.env: REACT_APP_API_URL, PG_CONNECTION_STRING.
+VS Code:
+ZIP download.
+
+README.md:
+Install Node.js (v16+), Python (3.8+), PostgreSQL.
+
+Run npm install in client/ and server/.
+
+Run pip install -r server/requirements.txt.
+
+Set up PostgreSQL (psql -U postgres).
+
+Update .env.
+
+Start backend: cd server && node app.js.
+
+Start frontend: cd client && npm run dev.
+VS Code extensions: Python, ESLint, Prettier, PostgreSQL Explorer.
+Code Quality:
+Clear JS/Python with comments.
+
+Error handling: Fallback to feedback.json if PostgreSQL fails.
+
+Lightweight codebase.
+Customizations & Unique Logics:
+Annotations: Fabric.js for labeling.
+
+SVG Output: potrace for scalable diagrams.
+
+Live Preview: Real-time OpenCV in camera.
+
+Profiles: Sketch history in PostgreSQL.
+
+Hugging Face: Placeholder for Artistic Pencil.
+
+Adaptive Styles: AI-driven parameter tweaks.
+
+Thematic Overlays: Holographic/starry effects.
+
+Collaborative Sketching: WebSocket placeholder.
+
+Social Sharing: Twitter/X, Instagram links.
+
+Educational Hints: Subject-specific tips.
+
+Sketch Evolution Tracker: Progress bar for improvements.
+Deliverables
+SketchSense app:
+Frontend: React (JS/JSX) with all features, sci-fi UI.
+
+Backend: Express, Python OpenCV, PostgreSQL.
+README.md: Setup, file guide, customization tips.
+
+.gitignore, .replit, .env.
+
+constants.js with configs.
+
+PostgreSQL setup (server/database.js), feedback.json fallback.
+
